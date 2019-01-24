@@ -1,1 +1,3 @@
 # springdataredis
+1:零配置xml实现SpringDataRedis
+2:通过配置文件实现SpringDataRedis
