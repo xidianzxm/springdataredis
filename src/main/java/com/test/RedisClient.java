@@ -14,8 +14,20 @@ import java.util.stream.Stream;
 @Component
 public class RedisClient<T> {
 
+
     @Autowired
     private RedisTemplate<String, T> redisTemplate;
+
+
+    public RedisTemplate<String, T> getRedisTemplate() {
+        return redisTemplate;
+    }
+
+    public void setRedisTemplate(RedisTemplate<String, T> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
+
+
 
 
     /***************************************************************

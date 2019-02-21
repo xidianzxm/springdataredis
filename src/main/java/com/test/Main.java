@@ -1,9 +1,13 @@
 package com.test;
 
 import com.test.UserVO;
+import com.test.lock.RedisDistributedLock;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
 
 import java.util.concurrent.TimeUnit;
 
@@ -114,6 +118,22 @@ public class Main {
         //"{\"@class\":\"com.test.domain.UserVO\",\"name\":\"user2\",\"address\":\"shanghai\",\"age\":19}"
         System.out.println(redisUtil.get("user2"));
 
+
+
+//        DistributedRedisLock lock = new DistributedRedisLock(redisClient.getRedisTemplate(),"count_key");
+
+        RedisDistributedLock lock11 = new RedisDistributedLock(redisClient.getRedisTemplate());
+
+        IRunnable1 runnable = new IRunnable1();
+
+        runnable.setLock(lock1);
+        Thread t1 = new Thread(runnable,"线程1");
+        Thread t2 = new Thread(runnable,"线程2");
+        Thread t3 = new Thread(runnable,"线程3");
+
+        t1.start();
+        t2.start();
+        t3.start();
 
 
 
